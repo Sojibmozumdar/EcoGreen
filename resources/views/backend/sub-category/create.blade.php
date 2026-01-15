@@ -77,18 +77,34 @@
 
          <div class="form-box">
 
-             <h5 class="form-title mb-4">Add New Category</h5>
+             <h5 class="form-title mb-4">Add New Sub Category</h5>
 
-             <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
+             <form action="{{ route('sub_category.store') }}" method="POST" enctype="multipart/form-data">
                  @csrf
 
                  <!-- Category Name -->
                  <div class="mb-3">
-                     <label class="form-label">Category Name</label>
+                     <label class="form-label">Sub Category Name</label>
                      <input type="text" name="name" class="form-control" class="@error('name') is-invalid @enderror"
                          placeholder="Enter category name">
                      @error('name')
                          <div class="alert alert-danger">{{ $message }}</div>
+                     @enderror
+                 </div>
+                 <div class="mb-3">
+                     <label class="form-label">Category</label>
+                     <select name="category_id" class="form-select @error('category_id') is-invalid @enderror">
+                         <option value="">-- Select Category --</option>
+                         @foreach ($categories as $category)
+                             <option value="{{ $category->id }}"
+                                 {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                 {{ $category->name }}
+                             </option>
+                         @endforeach
+                     </select>
+
+                     @error('category_id')
+                         <div class="text-danger small">{{ $message }}</div>
                      @enderror
                  </div>
 
@@ -115,7 +131,7 @@
                  <!-- Buttons -->
                  <div class="d-flex gap-2">
                      <button type="submit" name="submit" class="btn btn-eco">
-                         <i class="bi bi-check-circle"></i> Save Category
+                         <i class="bi bi-check-circle"></i> Save Sub Category
                      </button>
                      <a href="{{ url()->previous() }}" class="btn btn-outline-secondary btn-cancel">
                         Cancel

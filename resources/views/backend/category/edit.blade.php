@@ -77,16 +77,17 @@
 
          <div class="form-box">
 
-             <h5 class="form-title mb-4">Add New Category</h5>
+             <h5 class="form-title mb-4">Edit Category</h5>
 
-             <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
+             <form action="{{ route('category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                  @csrf
+                 @method('put')
 
                  <!-- Category Name -->
                  <div class="mb-3">
                      <label class="form-label">Category Name</label>
                      <input type="text" name="name" class="form-control" class="@error('name') is-invalid @enderror"
-                         placeholder="Enter category name">
+                         value="{{ $category->name }}" placeholder="Enter category name">
                      @error('name')
                          <div class="alert alert-danger">{{ $message }}</div>
                      @enderror
@@ -96,7 +97,7 @@
                  <div class="mb-3">
                      <label class="form-label">Order</label>
                      <input type="number" name="order" class="form-control" class="@error('order') is-invalid @enderror"
-                         placeholder="Display order">
+                         value="{{ $category->order }}" placeholder="Display order">
                      @error('order')
                          <div class="alert alert-danger">{{ $message }}</div>
                      @enderror
@@ -106,8 +107,8 @@
                  <div class="mb-4">
                      <label class="form-label d-block mb-2">Status</label>
                      <select class="form-select" name="status">
-                         <option value="1" selected>Active</option>
-                         <option value="0">Inactive</option>
+                         <option value="1" {{ $category->status == 1 ? 'selected' : '' }}>Active</option>
+                         <option value="0" {{ $category->status == 0 ? 'selected' : '' }}>Inactive</option>
                      </select>
                  </div>
 

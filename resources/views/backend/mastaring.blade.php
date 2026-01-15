@@ -233,7 +233,7 @@
         </div>
         <div class="d-flex align-items-center gap-3">
             <div class="text-end d-none d-sm-block">
-                <p class="mb-0 fw-bold" style="font-size: 0.85rem; line-height: 1.2;">Admin User</p>
+                <p class="mb-0 fw-bold" style="font-size: 0.85rem; line-height: 1.2;">Sojib Mozumder</p>
                 <small class="text-muted" style="font-size: 0.75rem;">Eco Manager</small>
             </div>
             <div style="width: 45px; height: 45px;">
@@ -299,3 +299,29 @@
         border: 1px solid #f5c2c0;
     }
 </style>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    document.querySelectorAll('.delete-form').forEach(form => {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This category will be permanently deleted!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#b42318',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+
+});
+</script>

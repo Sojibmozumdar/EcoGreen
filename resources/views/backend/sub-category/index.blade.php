@@ -115,9 +115,9 @@
 
              <!-- Header -->
              <div class="d-flex justify-content-between align-items-center mb-3">
-                 <h6 class="mb-0 fw-semibold">Category List</h6>
-                 <a href="{{ route('category.create') }}" class="btn btn-eco">
-                     <i class="bi bi-plus-circle"></i> Add Category
+                 <h6 class="mb-0 fw-semibold">Sub Category List</h6>
+                 <a href="{{ route('sub_category.create') }}" class="btn btn-eco">
+                     <i class="bi bi-plus-circle"></i> Add SubCategory
                  </a>
              </div>
 
@@ -126,6 +126,7 @@
                  <thead>
                      <tr>
                          <th>#</th>
+                         <th>Sub Category Name</th>
                          <th>Category Name</th>
                          <th width="120">Order</th>
                          <th width="150">Status</th>
@@ -133,26 +134,27 @@
                      </tr>
                  </thead>
                  <tbody>
-                     @foreach ($categories as $category)
+                     @foreach ($sub_categories as $row)
                          <tr>
                              <td>{{ $loop->iteration }}</td>
-                             <td>{{ $category->name }}</td>
-                             <td>{{ $category->order }}</td>
+                             <td>{{ $row->name }}</td>
+<td>{{ $row->category->name }}</td>
+                             <td>{{ $row->order }}</td>
                              <td>
-                                 <span class="{{ $category->status == 1 ? 'status-active' : 'status-inactive' }}">
-                                     {{ $category->status == 1 ? 'Active' : 'Inactive' }}
+                                 <span class="{{ $row->status == 1 ? 'status-active' : 'status-inactive' }}">
+                                     {{ $row->status == 1 ? 'Active' : 'Inactive' }}
                                  </span>
                              </td>
 
                              <td class="text-center">
-                                 <a href="{{ route('category.edit', $category->id) }}"
+                                 <a href="{{ route('sub_category.edit', $row->id) }}"
                                      class="btn btn-success btn-sm btn-action">
                                      <i class="bi bi-pencil"></i>
                                  </a>
 
 
 
-                                 <form action="{{ route('category.destroy', $category->id) }}" method="POST"
+                                 <form action="{{ route('sub_category.destroy', $row->id) }}" method="POST"
                                      class="d-inline delete-form">
                                      @csrf
                                      @method('DELETE')
@@ -171,7 +173,7 @@
              <div class="d-flex justify-content-between align-items-center mt-3">
 
                  <div>
-                     {{ $categories->links('pagination::bootstrap-5') }}
+                     {{ $sub_categories->links('pagination::bootstrap-5') }}
                  </div>
              </div>
 
