@@ -217,7 +217,14 @@
         <hr style="border-color: rgba(255,255,255,0.1)">
 
         <a href="#"><i class="bi bi-gear"></i> Settings</a>
-        <a href="#" class="text-danger"><i class="bi bi-box-arrow-left"></i> Logout</a>
+        <form method="POST" action="{{ route('logout') }}" id="logout-form">
+    @csrf
+    <a href="#" class="text-danger"
+       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <i class="bi bi-box-arrow-left"></i> Logout
+    </a>
+</form>
+
     </div>
 
     <div class="main">
