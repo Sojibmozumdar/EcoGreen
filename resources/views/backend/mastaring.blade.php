@@ -8,6 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    @stack('body-scripts')
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
@@ -207,6 +210,9 @@
             <span><i class="bi bi-tags-fill me-2"></i> Categories</span>
 
         </a>
+        <a href="{{ route('product.index') }}">
+            <i class="bi bi-box-seam"></i> Products
+        </a>
 
 
         <a href="#"><i class="bi bi-cart3"></i> Orders</a>
@@ -218,39 +224,40 @@
 
         <a href="#"><i class="bi bi-gear"></i> Settings</a>
         <form method="POST" action="{{ route('logout') }}" id="logout-form">
-    @csrf
-    <a href="#" class="text-danger"
-       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        <i class="bi bi-box-arrow-left"></i> Logout
-    </a>
-</form>
+            @csrf
+            <a href="#" class="text-danger"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="bi bi-box-arrow-left"></i> Logout
+            </a>
+        </form>
 
     </div>
 
     <div class="main">
         <div class="top-nav">
-    <div class="search-box">
-        <i class="bi bi-search text-muted"></i>
-        <input type="text" placeholder="Search orders, products...">
-    </div>
-    <div class="d-flex align-items-center">
-        <div class="me-4 position-relative">
-            <i class="bi bi-bell fs-5"></i>
-            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
-        </div>
-        <div class="d-flex align-items-center gap-3">
-            <div class="text-end d-none d-sm-block">
-                <p class="mb-0 fw-bold" style="font-size: 0.85rem; line-height: 1.2;">Sojib Mozumder</p>
-                <small class="text-muted" style="font-size: 0.75rem;">Eco Manager</small>
+            <div class="search-box">
+                <i class="bi bi-search text-muted"></i>
+                <input type="text" placeholder="Search orders, products...">
             </div>
-            <div style="width: 45px; height: 45px;">
-                <img src="{{asset('img')}}/sojib.jpg"
-                     class="rounded-circle border border-2 border-white shadow-sm"
-                     style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <div class="d-flex align-items-center">
+                <div class="me-4 position-relative">
+                    <i class="bi bi-bell fs-5"></i>
+                    <span
+                        class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="text-end d-none d-sm-block">
+                        <p class="mb-0 fw-bold" style="font-size: 0.85rem; line-height: 1.2;">Sojib Mozumder</p>
+                        <small class="text-muted" style="font-size: 0.75rem;">Eco Manager</small>
+                    </div>
+                    <div style="width: 45px; height: 45px;">
+                        <img src="{{ asset('img') }}/sojib.jpg"
+                            class="rounded-circle border border-2 border-white shadow-sm"
+                            style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
         @if (session('success'))
             <script>
@@ -307,28 +314,28 @@
     }
 </style>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
 
-    document.querySelectorAll('.delete-form').forEach(form => {
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
+        document.querySelectorAll('.delete-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "This category will be permanently deleted!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#b42318',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "This Feild will be permanently deleted!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#b42318',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
             });
         });
-    });
 
-});
+    });
 </script>

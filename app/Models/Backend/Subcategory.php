@@ -2,9 +2,9 @@
 
 namespace App\Models\Backend;
 
-use App\Models\Backend\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Subcategory extends Model
 {
@@ -14,11 +14,22 @@ class Subcategory extends Model
         'name',
         'category_id',
         'order',
-        'status'
+        'status',
     ];
 
-public function category(): BelongsTo
+    /**
+     * 🔹 Subcategory belongs to Category
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 
-{ return $this->BelongsTo(Category::class); }
-
+    /**
+     * 🔹 Subcategory has many Products
+     */
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'sub_category_id');
+    }
 }

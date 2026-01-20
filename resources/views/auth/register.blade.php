@@ -12,8 +12,8 @@
 
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #abe7b1ff, #90de8bff);
-            --deep-green: #1a441b;
+            --primary-gradient: linear-gradient(135deg, #52b788, #7cb49a);
+            --deep-green: #0f2b1e;
         }
 
         body {

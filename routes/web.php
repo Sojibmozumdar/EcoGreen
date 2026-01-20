@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -40,7 +41,18 @@ Route::get('/sub_categories/Edit/{id}',[SubCategoryController::class,'edit'])->n
 Route::put('/sub_categories/update/{id}',[SubCategoryController::class,'update'])->name('sub_category.update');
 Route::delete('sub_categories/{id}', [SubCategoryController::class, 'destroy'])->name('sub_category.destroy');
 
+//products
 
+Route::resource('products', ProductController::class);
+Route::get('/sub-categories/{category}', [ProductController::class, 'getSubCategories']);
+
+
+Route::get('/products',[ProductController::class,'index'])->name('product.index');
+Route::get('/products/create',[ProductController::class,'create'])->name('product.create');
+Route::post('/products/store',[ProductController::class,'store'])->name('product.store');
+Route::get('/products/Edit/{id}',[ProductController::class,'edit'])->name('product.edit');
+Route::put('/products/update/{id}',[ProductController::class,'update'])->name('product.update');
+Route::delete('products/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
 
 });
