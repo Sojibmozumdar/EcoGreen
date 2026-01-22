@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
@@ -10,71 +11,77 @@ class SubCategoryController extends Controller
 {
     public function index()
     {
-
         $sub_categories = Subcategory::orderByDesc("id")->paginate(5);
         return view('backend.sub-category.index', compact('sub_categories'));
     }
+
     public function create()
     {
         $categories = Category::orderBy('order', 'asc')->get();
-
         return view('backend.sub-category.create', compact('categories'));
     }
+
     public function store(Request $request)
     {
-        $subcategory              = new Subcategory();
-        $subcategory->name        = $request->name;
-        $subcategory->category_id = $request->category_id;
-        $subcategory->order       = $request->order ?? 0;
-        $subcategory->status      = $request->status;
 
-        if ($subcategory->save()) {
-            return redirect()->route('sub_category.index')
-                ->with('success', 'Created Successfully');
-        }
+        $validated = $request->validate([
+            'name'        => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'order'       => 'nullable|integer|min:0',
+            'status'      => 'required|in:0,1',
+        ]);
 
-        return redirect()->back()
-            ->with('danger', 'Create unsuccessful');
+        $subcategory = Subcategory::create([
+            'name'        => $validated['name'],
+            'category_id' => $validated['category_id'],
+            'order'       => $validated['order'] ?? 0,
+            'status'      => $validated['status'],
+        ]);
+
+        return redirect()
+            ->route('sub_category.index')
+            ->with('success', 'Created Successfully');
     }
 
     public function edit($id)
     {
-
-        $row = Subcategory::find($id);
-
+        $row = Subcategory::findOrFail($id);
         $categories = Category::orderBy('order', 'asc')->get();
+
         return view('backend.sub-category.edit', compact('row', 'categories'));
     }
 
     public function update(Request $request, $id)
     {
-        $subcategory                 = Subcategory::find($id);
-        $subcategory->name           = $request->name;
-        $subcategory->category_id = $request->category_id;
-        $subcategory->order          = $request->order;
-        $subcategory->status         = $request->status;
 
-        if ($subcategory->save()) {
-            return redirect()->route('sub_category.index')
-                ->with('success', 'Updated Successfully');
-        }
+        $validated = $request->validate([
+            'name'        => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'order'       => 'nullable|integer|min:0',
+            'status'      => 'required|in:0,1',
+        ]);
 
-        return redirect()->back()
-            ->with('danger', 'Update unsuccessful');
+        $subcategory = Subcategory::findOrFail($id);
 
+        $subcategory->update([
+            'name'        => $validated['name'],
+            'category_id' => $validated['category_id'],
+            'order'       => $validated['order'] ?? 0,
+            'status'      => $validated['status'],
+        ]);
+
+        return redirect()
+            ->route('sub_category.index')
+            ->with('success', 'Updated Successfully');
     }
 
     public function destroy($id)
     {
         $subcategory = Subcategory::findOrFail($id);
+        $subcategory->delete();
 
-        if ($subcategory->delete()) {
-            return redirect()->route('sub_category.index')
-                ->with('success', 'Category deleted successfully');
-        }
-
-        return redirect()->back()
-            ->with('danger', 'Delete failed');
+        return redirect()
+            ->route('sub_category.index')
+            ->with('success', 'Category deleted successfully');
     }
-
 }

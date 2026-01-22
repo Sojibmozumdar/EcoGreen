@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Backend\Upload;
 use App\Models\Backend\Product;
 use App\Models\Backend\Category;
 use App\Models\Backend\Subcategory;
-use App\Models\Backend\Upload;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\UpdatePostRequest;
+use App\Http\Requests\Product\StorePostRequest;
 
 class ProductController extends Controller
 {
@@ -29,18 +31,8 @@ class ProductController extends Controller
         return view('backend.product.create', compact('categories', 'sub_categories'));
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'sub_category_id' => 'required|exists:sub_categories,id',
-            'price' => 'required|numeric|min:0',
-            'discount' => 'nullable|numeric|min:0',
-            'quantity' => 'required|integer|min:0',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-        ]);
-
         $product = Product::create([
             'name' => $request->name,
             'category_id' => $request->category_id,
@@ -81,19 +73,9 @@ class ProductController extends Controller
         return view('backend.product.edit', compact('product', 'categories', 'sub_categories'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdatePostRequest $request, $id)
     {
         $product = Product::findOrFail($id);
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'sub_category_id' => 'required|exists:sub_categories,id',
-            'price' => 'required|numeric|min:0',
-            'discount' => 'nullable|numeric|min:0',
-            'quantity' => 'required|integer|min:0',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-        ]);
 
         $product->update([
             'name' => $request->name,
