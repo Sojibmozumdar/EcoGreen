@@ -1,3 +1,14 @@
+@extends('frontend.mastaring')
+
+
+@section('content')
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,19 +19,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <header class="main-header">
-        <div class="logo">EcoGreen<span>.</span></div>
-        <nav class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="#">Shop</a>
-            <a href="#">Categories</a>
-            <a href="#">Contact</a>
-        </nav>
-        <div class="header-icons">
-            <a href="#" class="btn-portal">Cart (1)</a>
-        </div>
-    </header>
 
     <section class="product-details container">
         <div class="details-wrapper">
@@ -93,10 +91,6 @@
         </div>
     </section>
 
-    <footer class="main-footer">
-        <p>&copy; 2026 EcoGreen Store. All rights reserved.</p>
-    </footer>
-
     <script>
         function updateQty(change) {
             let input = document.getElementById('qty-input');
@@ -119,3 +113,4 @@
     </script>
 </body>
 </html>
+@endsection

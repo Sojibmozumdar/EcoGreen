@@ -14,6 +14,13 @@ Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/product-details', [FrontendController::class, 'productDetails'])->name('product.details');
 
 
+Route::get('/category/{id}', function ($id) {
+    // category wise product
+})->name('shop.category');
+Route::get('/sub-category/{id}', fn($id) => '')->name('shop.subcategory');
+
+
+
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 

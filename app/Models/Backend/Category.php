@@ -2,6 +2,8 @@
 
 namespace App\Models\Backend;
 
+use App\Models\Backend\Product;
+use App\Models\Backend\Subcategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -20,7 +22,7 @@ class Category extends Model
      */
     public function subcategories(): HasMany
     {
-        return $this->hasMany(Subcategory::class, 'category_id');
+        return $this->hasMany(Subcategory::class, 'category_id')->where('status', 1)->orderBy('order', 'asc');
     }
 
     /**
@@ -30,4 +32,8 @@ class Category extends Model
     {
         return $this->hasMany(Product::class, 'category_id');
     }
+
+
+
+
 }

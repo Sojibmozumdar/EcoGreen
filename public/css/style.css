@@ -417,3 +417,316 @@ body {
     .details-wrapper { flex-direction: column; }
     .product-title { font-size: 1.8em; }
 }
+/* Dropdown Wrapper */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Button */
+.drop-btn {
+    text-decoration: none;
+    color: #1f513f;
+    font-weight: 500;
+    padding: 8px 12px;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    min-width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+/* Dropdown Items */
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #1f513f;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.dropdown-menu a:hover {
+    background: #eaf6ef;
+    color: #2e8b57;
+}
+
+/* Hover Effect */
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+/* ===== Dropdown ===== */
+.dropdown {
+    position: relative;
+}
+
+.drop-btn {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    min-width: 220px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    display: none;
+    padding: 10px 0;
+    z-index: 999;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-item {
+    position: relative;
+}
+
+.dropdown-item > a {
+    display: block;
+    padding: 10px 18px;
+    color: #1a5d42;
+    font-weight: 500;
+}
+
+.dropdown-item > a:hover {
+    background: #eaf6ef;
+}
+
+/* ===== Sub Dropdown ===== */
+.sub-dropdown {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: #ffffff;
+    min-width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    display: none;
+}
+
+.dropdown-item:hover .sub-dropdown {
+    display: block;
+}
+
+.sub-dropdown a {
+    display: block;
+    padding: 10px 16px;
+    color: #2e8b57;
+}
+
+.sub-dropdown a:hover {
+    background: #f0f7f4;
+}
+
+
+:root {
+    --green-dark: #062c21;
+    --green-main: #1a5d42;
+    --green-accent: #52b788;
+    --green-soft: #f0f7f4;
+    --white: #ffffff;
+    --shadow: rgba(6, 44, 33, 0.1);
+}
+
+.eco-products {
+    padding: 100px 5%;
+    background: radial-gradient(circle at top right, #e8f3ee, var(--green-soft));
+    font-family: 'Poppins', sans-serif;
+}
+
+.header-content {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.sub-title {
+    color: var(--green-accent);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.section-title {
+    color: var(--green-dark);
+    font-size: 3rem;
+    margin-top: 10px;
+}
+
+/* Category Tabs Unique Design */
+.category-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.tab-btn {
+    padding: 12px 30px;
+    border: none;
+    background: var(--white);
+    color: var(--green-main);
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 5px 15px var(--shadow);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tab-btn.active {
+    background: var(--green-main);
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+/* Glassmorphism Card */
+.products-mesh-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
+    padding: 20px;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.glass-card:hover {
+    background: var(--white);
+    transform: translateY(-15px);
+    box-shadow: 0 30px 60px rgba(26, 93, 66, 0.15);
+}
+
+/* Floating Animation */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+.floating {
+    animation: float 4s ease-in-out infinite;
+}
+
+.product-visual {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: var(--green-soft);
+    border-radius: 18px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.quick-actions {
+    position: absolute;
+    right: -50px;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: 0.4s;
+}
+
+.glass-card:hover .quick-actions {
+    right: 15px;
+}
+
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: var(--white);
+    color: var(--green-dark);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.icon-btn:hover {
+    background: var(--green-accent);
+    color: white;
+}
+
+/* Card Typography */
+.card-info h3 {
+    color: var(--green-dark);
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.amount {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--green-main);
+}
+
+.rating {
+    background: #fff8e1;
+    color: #ffa000;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+/* Modern Button */
+.modern-buy-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--green-dark);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+.modern-buy-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+}
+
+.modern-buy-btn:hover::before {
+    left: 100%;
+}
