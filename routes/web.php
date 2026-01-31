@@ -11,7 +11,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 //Route::get('/', function () { return view('home');});
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
-Route::get('/product-details', [FrontendController::class, 'productDetails'])->name('product.details');
+Route::get('/product-details/{id}', [FrontendController::class, 'productDetails'])->name('product.details');
 
 
 Route::get('/category/{id}', function ($id) {

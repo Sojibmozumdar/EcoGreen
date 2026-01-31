@@ -51,14 +51,15 @@
 
                         <div class="price-row">
                             <span class="amount">
-                                ৳ {{ $product->price }}
+                                BDT {{ $product->price }}
                             </span>
                         </div>
 
-                        <button class="modern-buy-btn">
-                            <span>Add to Bag</span>
+                        <a href="{{ route('product.details', $product->id) }}" class="modern-buy-btn">
+                            <span>Show Product Details</span>
                             <i class="fas fa-shopping-cart"></i>
-                        </button>
+                        </a>
+
                     </div>
                 </div>
             @endforeach
