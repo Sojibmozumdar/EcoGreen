@@ -12,7 +12,8 @@ class FrontendController extends Controller
 
         $categories = Category::with(['subCategories' => function ($q) {$q->where('status', 1);}])->where('status', 1)->get();
 
-        $products = Product::with('uploads')->where('status', 1)->latest()->take(8)->get();
+        $products = Product::with('uploads')->where('status', 1)->latest()->get();
+
 
         return view('home', compact('categories', 'products'));
 
@@ -26,3 +27,4 @@ class FrontendController extends Controller
     }
 
 }
+
