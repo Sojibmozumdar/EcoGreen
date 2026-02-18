@@ -91,7 +91,7 @@ body {
     top: 100%;
     left: 0;
     background: #ffffff;
-    min-width: 220px;
+    min-width: 150px;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,.12);
     opacity: 0;
@@ -131,7 +131,7 @@ body {
     top: 0;
     left: 100%;
     background: #ffffff;
-    min-width: 200px;
+    min-width: 150px;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,.12);
     display: none; /* Keep distinct from main dropdown animation */

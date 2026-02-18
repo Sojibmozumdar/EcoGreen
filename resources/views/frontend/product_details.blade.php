@@ -8,7 +8,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Eco Steel Bottle - Product Details | EcoGreen</title>
+        <title> Product Details | EcoGreen</title>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     </head>
@@ -49,11 +49,11 @@
 
                     <p class="price">
                         @if ($product->discount > 0)
-                            <span class="old-price">৳ {{ number_format($product->price, 2) }}</span>
-                            <span class="new-price">৳ {{ number_format($finalPrice, 2) }}</span>
+                            <span class="old-price">BDT {{ number_format($product->price, 2) }}</span>
+                            <span class="new-price">BDT {{ number_format($finalPrice, 2) }}</span>
                             <span class="discount-badge">{{ $product->discount }}% OFF</span>
                         @else
-                            <span class="new-price">৳ {{ number_format($product->price, 2) }}</span>
+                            <span class="new-price">BDT {{ number_format($product->price, 2) }}</span>
                         @endif
                     </p>
 
@@ -91,15 +91,25 @@
                     </div>
 
                     <div class="action-btns">
-                        <button class="btn-add-cart" {{ $product->quantity < 1 ? 'disabled' : '' }}>
-                            ADD TO CART
-                        </button>
+                        <form action="{{ route('cart.add') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="quantity" id="cart-qty" value="1">
 
-                        <button class="btn-buy-now" {{ $product->quantity < 1 ? 'disabled' : '' }}>
-                            BUY IT NOW
-                        </button>
+                            <button type="submit" class="btn-add-cart" {{ $product->quantity < 1 ? 'disabled' : '' }}>
+                                ADD TO CART
+                            </button>
+                        </form>
+                        <form action="{{ route('buy.now') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="quantity" id="buy-qty" value="1">
+
+                            <button type="submit" class="btn-buy-now" {{ $product->quantity < 1 ? 'disabled' : '' }}>
+                                BUY IT NOW
+                            </button>
+                        </form>
                     </div>
-
 
                     <div class="extra-info">
                         <p>🚚 <strong>Delivery:</strong> {{ $product->delivery_policy }}</p>
@@ -172,6 +182,21 @@
                 });
             });
         </script>
+        <script>
+            function updateQty(change) {
+                let input = document.getElementById('qty-input');
+                let val = parseInt(input.value) + change;
+
+                if (val < 1) val = 1;
+
+                input.value = val;
+
+                // Update hidden form quantity
+                document.getElementById('cart-qty').value = val;
+                document.getElementById('buy-qty').value = val;
+            }
+        </script>
+
 
     </body>
 

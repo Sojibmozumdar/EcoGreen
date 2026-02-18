@@ -13,13 +13,26 @@ use App\Http\Controllers\Backend\SubCategoryController;
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/product-details/{id}', [FrontendController::class, 'productDetails'])->name('product.details');
 
+Route::post('/add-to-cart', [FrontendController::class, 'addToCart'])->name('cart.add');
+
+Route::get('/user-login', [FrontendController::class, 'userlogin'])->name('user.login');
+
+Route::get('/user-register', [FrontendController::class,'userRegister'])->name('user.register');
+Route::post('/user-register-store', [FrontendController::class,'registerStore'])->name('user.register.store');
+Route::get('/otp/varification/{otp}', [FrontendController::class,'otpVarification']);
+Route::post('/user-login', [FrontendController::class, 'userloginPost'])->name('user.login');
+
+
+Route::post('/buy-now', [FrontendController::class, 'buyNow'])->name('buy.now');
+
+
+
+
 
 Route::get('/category/{id}', function ($id) {
     // category wise product
 })->name('shop.category');
 Route::get('/sub-category/{id}', fn($id) => '')->name('shop.subcategory');
-
-
 
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
