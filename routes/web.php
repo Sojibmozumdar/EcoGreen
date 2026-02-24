@@ -1,19 +1,20 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
-use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\ShoppingCartController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function () { return view('home');});
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/product-details/{id}', [FrontendController::class, 'productDetails'])->name('product.details');
 
-Route::post('/add-to-cart', [FrontendController::class, 'addToCart'])->name('cart.add');
+Route::post('/add-to-cart', [ShoppingCartController::class, 'addToCart'])->name('cart.add');
 
 Route::get('/user-login', [FrontendController::class, 'userlogin'])->name('user.login');
 
@@ -22,6 +23,10 @@ Route::post('/user-register-store', [FrontendController::class,'registerStore'])
 Route::get('/otp/varification/{otp}', [FrontendController::class,'otpVarification']);
 Route::post('/user-login', [FrontendController::class, 'userloginPost'])->name('user.login');
 
+Route::get('/view-carts', [ShoppingCartController::class, 'viewCarts'])->name('view.carts');
+Route::post('/cart/update-ajax', [ShoppingCartController::class, 'updateCartAjax'])->name('cart.update.ajax');
+Route::post('/cart/delete-ajax', [ShoppingCartController::class, 'deleteCartAjax'])->name('cart.delete.ajax');
+Route::get('/checkout', [ShoppingCartController::class, 'checkout'])->name('checkout');
 
 Route::post('/buy-now', [FrontendController::class, 'buyNow'])->name('buy.now');
 
@@ -35,11 +40,11 @@ Route::get('/category/{id}', function ($id) {
 Route::get('/sub-category/{id}', fn($id) => '')->name('shop.subcategory');
 
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth','admin'])->name('dashboard');
 
 //Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','admin'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

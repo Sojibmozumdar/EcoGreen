@@ -155,7 +155,7 @@
                         value="{{ old('price', $product->price) }}">
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Discount</label>
+                    <label class="form-label">Discount(%)</label>
                     <input type="number" step="0.01" name="discount" class="form-control"
                         value="{{ old('discount', $product->discount) }}">
                 </div>

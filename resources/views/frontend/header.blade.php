@@ -37,12 +37,13 @@
             </div>
         </div>
 
-        <a href="#">Eco-Friendly</a>
+
         <a href="#">New Arrivals</a>
         <a href="#">Contact</a>
+        <a href="{{ route('user.login') }}">Login</a>
     </nav>
 
     <div class="header-icons">
-        <a href="#" class="btn-portal">Cart (0)</a>
+        <a href="{{ route('view.carts') }}" class="btn-portal">Cart ({{Auth::user()->carts->count()}})</a>
     </div>
 </header>

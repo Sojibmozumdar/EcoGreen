@@ -16,6 +16,9 @@
     <body>
 
         <section class="product-details containers">
+
+
+
             <div class="details-wrapper">
                 <div class="product-gallery">
                     <div class="main-img">
@@ -93,7 +96,7 @@
                     <div class="action-btns">
                         <form action="{{ route('cart.add') }}" method="POST">
                             @csrf
-                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="product" value="{{ $product->id }}">
                             <input type="hidden" name="quantity" id="cart-qty" value="1">
 
                             <button type="submit" class="btn-add-cart" {{ $product->quantity < 1 ? 'disabled' : '' }}>

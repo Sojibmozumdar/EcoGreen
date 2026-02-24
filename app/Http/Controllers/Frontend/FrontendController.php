@@ -31,14 +31,7 @@ class FrontendController extends Controller
         return view('frontend.product_details', compact('product'));
     }
 
-    public function addToCart(Request $request)
-    {
 
-        if (! Auth::check()) {
-            return redirect("user-login");
-        }
-
-    }
 
     public function userlogin()
     {
