@@ -44,6 +44,6 @@
     </nav>
 
     <div class="header-icons">
-        <a href="{{ route('view.carts') }}" class="btn-portal">Cart ({{Auth::user()->carts->count()}})</a>
+        <a href="{{ route('view.carts') }}" class="btn-portal">Cart ({{ auth()->user()?->carts?->count() ?? 0 }})</a>
     </div>
 </header>
